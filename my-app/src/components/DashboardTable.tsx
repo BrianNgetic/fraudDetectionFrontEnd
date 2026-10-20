@@ -1,6 +1,6 @@
 import { mockTransactions } from '../data/mockTransactions';
 import Transaction from '../types/Transaction';
-import TransactionRow from "./TransactionRow"
+import DashboardTableRow from "./DashboardTableRow"
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -23,20 +23,20 @@ for now lets jus do the transaction part
 this ugly code is jus for now before i expose the back end
 
 */}
-export interface transactionTableProps{
+export interface DashboardTableProps{
     TransactionEvent? : Transaction;
     mockTransactions : Transaction[];
 }
 
 
 
-const TransactionTable = ({ mockTransactions} : transactionTableProps) => {
+const DashboardTable = ({ mockTransactions} : DashboardTableProps) => {
  
     return(
-       <div className = 'mainTableContainer'>
+       <div>
             
-        <TableContainer component={Paper}>
-            <Table>
+        <TableContainer component={Paper} >
+            <Table  className = 'mainTableContainer'>
                 <TableHead>
                     <TableRow>
                         <TableCell>Id</TableCell>
@@ -50,7 +50,7 @@ const TransactionTable = ({ mockTransactions} : transactionTableProps) => {
                 </TableHead>
                 <TableBody>
                     {mockTransactions.map((mockTransaction) => (
-                        <TransactionRow key = {mockTransaction.id} TransactionEvent = {mockTransaction} />
+                        <DashboardTableRow key = {mockTransaction.id} TransactionEvent = {mockTransaction} />
                     )
 
                     )}
@@ -64,4 +64,4 @@ const TransactionTable = ({ mockTransactions} : transactionTableProps) => {
     );
 }
 
-export default TransactionTable;
+export default DashboardTable;

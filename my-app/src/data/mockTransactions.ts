@@ -1,6 +1,8 @@
 // src/data/mockTransactions.ts
 
-import Transaction, { GeoLocation, LocalDateTime } from '../types/Transaction';
+import Transaction, { GeoLocation, LocalDateTime, RiskLevel } from '../types/Transaction';
+
+export { RiskLevel };
 
 const createTransaction = (
   id: string,
@@ -12,8 +14,10 @@ const createTransaction = (
   country: string,
   longitude: GeoLocation,
   latitude: GeoLocation,
-  devideId: string,
-  time: string
+  deviceId: string,
+  time: LocalDateTime,
+  riskLevel: RiskLevel,
+  flagged: boolean
 ): Transaction => {
   return {
     id,
@@ -25,13 +29,14 @@ const createTransaction = (
     country,
     longitude,
     latitude,
-    devideId,
+    deviceId,
     time,
+    riskLevel,
+    flagged,
   };
-}
+};
 
 export const mockTransactions: Transaction[] = [
-
   createTransaction(
     'tx_101',
     'cust_901',
@@ -43,7 +48,9 @@ export const mockTransactions: Transaction[] = [
     -73.9851 as GeoLocation,
     40.7488 as GeoLocation,
     'dev_ios_01',
-    '2026-03-30T08:15:00' as unknown as LocalDateTime
+    '2026-03-30T08:15:00' as unknown as LocalDateTime,
+    RiskLevel.LOW,
+    false
   ),
   createTransaction(
     'tx_102',
@@ -56,7 +63,9 @@ export const mockTransactions: Transaction[] = [
     -122.3321 as GeoLocation,
     47.6062 as GeoLocation,
     'dev_web_05',
-    '2026-03-30T10:42:00' as unknown as LocalDateTime
+    '2026-03-30T10:42:00' as unknown as LocalDateTime,
+    RiskLevel.LOW,
+    false
   ),
   createTransaction(
     'tx_103',
@@ -69,7 +78,9 @@ export const mockTransactions: Transaction[] = [
     2.3522 as GeoLocation,
     48.8566 as GeoLocation,
     'dev_ios_01',
-    '2026-03-30T12:05:30' as unknown as LocalDateTime
+    '2026-03-30T12:05:30' as unknown as LocalDateTime,
+    RiskLevel.MEDIUM,
+    false
   ),
   createTransaction(
     'tx_104',
@@ -82,7 +93,9 @@ export const mockTransactions: Transaction[] = [
     -0.1278 as GeoLocation,
     51.5074 as GeoLocation,
     'dev_and_12',
-    '2026-03-30T14:22:15' as unknown as LocalDateTime
+    '2026-03-30T14:22:15' as unknown as LocalDateTime,
+    RiskLevel.LOW,
+    false
   ),
   createTransaction(
     'tx_105',
@@ -95,6 +108,158 @@ export const mockTransactions: Transaction[] = [
     -84.4277 as GeoLocation,
     33.6407 as GeoLocation,
     'dev_web_09',
-    '2026-03-30T18:50:00' as unknown as LocalDateTime
+    '2026-03-30T18:50:00' as unknown as LocalDateTime,
+    RiskLevel.MEDIUM,
+    false
+  ),
+  createTransaction(
+    'tx_106',
+    'cust_905',
+    '4500.00',
+    'USD',
+    'Binance Crypto Exchange',
+    'Cryptocurrency',
+    'SC',
+    55.4513 as GeoLocation,
+    -4.6796 as GeoLocation,
+    'dev_vpn_77',
+    '2026-03-30T20:10:00' as unknown as LocalDateTime,
+    RiskLevel.HIGH,
+    true
+  ),
+  createTransaction(
+    'tx_107',
+    'cust_906',
+    '18.20',
+    'CAD',
+    'Tim Hortons',
+    'Food & Beverage',
+    'CA',
+    -79.3832 as GeoLocation,
+    43.6532 as GeoLocation,
+    'dev_and_04',
+    '2026-03-30T21:05:12' as unknown as LocalDateTime,
+    RiskLevel.LOW,
+    false
+  ),
+  createTransaction(
+    'tx_108',
+    'cust_901',
+    '890.50',
+    'USD',
+    'Best Buy',
+    'Electronics',
+    'US',
+    -73.9851 as GeoLocation,
+    40.7488 as GeoLocation,
+    'dev_ios_01',
+    '2026-03-30T22:30:00' as unknown as LocalDateTime,
+    RiskLevel.MEDIUM,
+    false
+  ),
+  createTransaction(
+    'tx_109',
+    'cust_907',
+    '3200.00',
+    'EUR',
+    'Luxury Watch Boutique',
+    'Jewelry',
+    'MC',
+    7.4246 as GeoLocation,
+    43.7384 as GeoLocation,
+    'dev_tor_03',
+    '2026-03-31T01:14:40' as unknown as LocalDateTime,
+    RiskLevel.HIGH,
+    true
+  ),
+  createTransaction(
+    'tx_110',
+    'cust_908',
+    '64.10',
+    'USD',
+    'Target',
+    'Retail',
+    'US',
+    -87.6298 as GeoLocation,
+    41.8781 as GeoLocation,
+    'dev_ios_15',
+    '2026-03-31T09:20:00' as unknown as LocalDateTime,
+    RiskLevel.LOW,
+    false
+  ),
+  createTransaction(
+    'tx_111',
+    'cust_909',
+    '1200.00',
+    'USD',
+    'ATM Cash Withdrawal',
+    'Cash',
+    'US',
+    -118.2437 as GeoLocation,
+    34.0522 as GeoLocation,
+    'dev_atm_88',
+    '2026-03-31T11:02:18' as unknown as LocalDateTime,
+    RiskLevel.HIGH,
+    true
+  ),
+  createTransaction(
+    'tx_112',
+    'cust_910',
+    '14.99',
+    'USD',
+    'Netflix',
+    'Subscriptions',
+    'US',
+    -121.9552 as GeoLocation,
+    37.2638 as GeoLocation,
+    'dev_srv_02',
+    '2026-03-31T12:00:00' as unknown as LocalDateTime,
+    RiskLevel.LOW,
+    false
+  ),
+  createTransaction(
+    'tx_113',
+    'cust_911',
+    '499.00',
+    'JPY',
+    '7-Eleven',
+    'Convenience',
+    'JP',
+    139.6917 as GeoLocation,
+    35.6895 as GeoLocation,
+    'dev_and_22',
+    '2026-03-31T13:45:00' as unknown as LocalDateTime,
+    RiskLevel.LOW,
+    false
+  ),
+  createTransaction(
+    'tx_114',
+    'cust_912',
+    '2850.00',
+    'USD',
+    'Western Union Transfer',
+    'Money Transfer',
+    'NG',
+    3.3792 as GeoLocation,
+    6.5244 as GeoLocation,
+    'dev_web_99',
+    '2026-03-31T15:10:22' as unknown as LocalDateTime,
+    RiskLevel.HIGH,
+    true
+  ),
+  createTransaction(
+    'tx_115',
+    'cust_913',
+    '72.30',
+    'AUD',
+    'Coles Supermarket',
+    'Groceries',
+    'AU',
+    151.2093 as GeoLocation,
+    -33.8688 as GeoLocation,
+    'dev_ios_09',
+    '2026-03-31T16:30:00' as unknown as LocalDateTime,
+    RiskLevel.LOW,
+    false
   ),
 ];

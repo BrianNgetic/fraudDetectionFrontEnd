@@ -1,6 +1,39 @@
+
 .navBar{
     display: flex;
     justify-content: space-between;
-    background-color: midnightblue;
-  
+    /* background-color: rgb(71, 71, 181); */
+    background-color:#1D428A;
+}
+
+ul{
+    list-style-type: none;
+    padding: 0;
+    margin:0
+
+}
+li{
+    margin-bottom: 30px;
+
+}
+li:hover{
+    background-color:#13274F ;
+}
+
+
+.sideBar{
+    margin-top: 25px;
+    margin-right: 10px;
+    background-color: #002D72;
+    min-height: 100vh;
+
+}
+.mainDashBoard{
+    margin-left: 10px;
+     background-color: #002D72;
+    
+}
+
+.mainTableContainer{
+    background-color: #0066b2;
 }

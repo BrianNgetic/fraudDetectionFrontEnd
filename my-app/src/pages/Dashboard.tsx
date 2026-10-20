@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import TransactionTable from "../components/TransactionTable";
+import DashboardTable from "../components/DashboardTable";
 import Transaction from "../types/Transaction";
 import { mockTransactions as initalMockData} from "../data/mockTransactions";
-import { transactionTableProps } from "../components/TransactionTable";
+import { DashboardTableProps } from "../components/DashboardTable";
+import "../components/ComponentStyling.css"
 
 // const[mockTransactions, setMockTransactions] = useState([]);
 
@@ -13,15 +14,15 @@ import { transactionTableProps } from "../components/TransactionTable";
 //     setMockTransactions:
 // */}
 
-const Dashboard = ({mockTransactions} : transactionTableProps) =>{
+const Dashboard = ({mockTransactions} : DashboardTableProps) =>{
     return (
         <div className = "mainDashBoard">
             <section>
-                <h1>FraudWatch</h1>
-                <h3>Fraud Watch Monitoring</h3>
+                <h2>FraudWatch</h2>
+                <h4>Fraud Watch Monitoring</h4>
             </section>
             <section>
-                <TransactionTable mockTransactions={mockTransactions}/>
+                <DashboardTable mockTransactions={mockTransactions}/>
             </section>
           
         </div>

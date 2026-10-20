@@ -6,10 +6,10 @@ import TableRow from '@mui/material/TableRow';
     return a transaction row
     this wont the whole information , jus basic. onclick -> transactionDetaisl
     */ }
-interface TransactionRowProps{
+interface DashboardTableRowProps{
     TransactionEvent : Transaction;
 }
-const TransactionRow = ({TransactionEvent } : TransactionRowProps) => {
+const DashboardTableRow = ({TransactionEvent } : DashboardTableRowProps) => {
 
     return(
 
@@ -29,4 +29,4 @@ const TransactionRow = ({TransactionEvent } : TransactionRowProps) => {
     
     );
 }
-export default TransactionRow;
+export default DashboardTableRow;
