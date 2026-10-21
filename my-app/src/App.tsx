@@ -33,7 +33,7 @@ function App() {
                  <Routes>
                     <Route path = "/" element = {<Dashboard mockTransactions={initialMockData}/>} />
                     <Route path = "/pages/DashBoard" element = {<Dashboard mockTransactions={initialMockData}/>} />
-                    <Route path = "/pages/Transactions" element = {<Transactions />} />
+                    <Route path = "/pages/Transactions" element = {<Transactions listOfTransactions={initialMockData} />} />
                     <Route path = "/pages/Alert" element = {<Alert/>} />
                   </Routes>
             </main>

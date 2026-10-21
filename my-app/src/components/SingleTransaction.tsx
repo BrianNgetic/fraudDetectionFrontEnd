@@ -1,7 +1,7 @@
 import Transaction from "../types/Transaction";
 import RiskBadge from "./RiskBadge";
 
-interface SingleTransactionProps{
+export interface SingleTransactionProps{
    transaction :Transaction
 }
 
@@ -10,7 +10,7 @@ const SingleTransaction = ({transaction} : SingleTransactionProps) =>{
 
     return (
         <>
-        <li style = {{backgroundColor : "#3C3939",display : "flex", justifyContent: "space-between" }}>
+        <li style = {{backgroundColor : "#3C3939",display : "flex", justifyContent: "space-between",width : "70vw"}}>
             <div style = {{display : "flex", flexDirection: "column", justifyContent: "flex-start"}}>
                 <span>{transaction.id}</span>
                 <div>
@@ -20,7 +20,7 @@ const SingleTransaction = ({transaction} : SingleTransactionProps) =>{
                 </div>
             </div>
             <div >
-               <div style = {{display: "flex", justifyContent : "flex-end"}}> 
+               <div style = {{display: "flex",flexDirection: 'column', justifyContent : "flex-end"}}> 
                     <span>{transaction.amount}</span>
                     <RiskBadge Level = {transaction.riskLevel} />
                 </div>

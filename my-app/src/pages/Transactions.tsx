@@ -1,18 +1,21 @@
  import Transaction from "../types/Transaction";
  import SingleTransaction from "../components/SingleTransaction";
+//  import { SingleTransactionProps } from "../components/SingleTransaction";
 
  interface TransactionsProps{
-        transaction :Transaction;
-        listOfTransactions: Transaction[];
+        transaction? : Transaction;
+        listOfTransactions : Transaction[];
  }
  
- const Transactions = ({listOfTransactions , transaction}: TransactionsProps) =>{
+ const Transactions = ({listOfTransactions}: TransactionsProps) =>{
         return (
 
                 <ul>
+                        {
                         listOfTransactions.map( (singleTransaction) => (
-                                <SingleTransaction  transaction ={ SingleTransaction} />
+                                <SingleTransaction   key = {singleTransaction.id} transaction ={ singleTransaction} />
                         ))
+                        }
                 </ul>
         );
 }
