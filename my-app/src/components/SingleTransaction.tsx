@@ -1,6 +1,11 @@
-import { useState } from "react";
+
+import React, { Component, useState } from "react";
 import Transaction from "../types/Transaction";
 import RiskBadge from "./RiskBadge";
+
+import SlidingPane from "react-sliding-pane";
+import "react-sliding-pane/dist/react-sliding-pane.css";
+
 import TransactionDetails from "./TransactionDetails";
 
 export interface SingleTransactionProps{
@@ -10,17 +15,16 @@ export interface SingleTransactionProps{
 
 const SingleTransaction = ({transaction} : SingleTransactionProps) =>{ 
 
+    const [state, setState] = useState({
+        isPaneOpen: false,
 
-    const[isVisible, setIsVisible] = useState(false);
+    });
 
-    const handClick = () => {
-            setIsVisible(true);
-    }
-
+  
  
     return (
         <>
-        <li style = {{backgroundColor : "",display : "flex", justifyContent: "space-between",width : "70vw"}} onClick={handClick}>
+        <li style = {{backgroundColor : "",display : "flex", justifyContent: "space-between",width : "70vw"}}  onClick={() => setState({ isPaneOpen: true })}>
             <div style = {{display : "flex", flexDirection: "column", justifyContent: "flex-start"}}>
                 <span>{transaction.id}</span>
                 <div>
@@ -38,9 +42,28 @@ const SingleTransaction = ({transaction} : SingleTransactionProps) =>{
                     <p> arrow key</p>
                 </div> */}
             </div>
-            {isVisible && <TransactionDetails transactionToBeDisplayed={transaction} />}
+    
 
         </li>
+
+        <SlidingPane
+            className="TransactionDetailsSlidingWindow"
+            // overlayClassName="some-custom-overlay-class"
+            isOpen={state.isPaneOpen}
+            // title="Hey, it is optional pane title.  I can be React component too."
+            // subtitle="Optional subtitle."
+            onRequestClose={() => {
+            // triggered on "<" on left top click or on outside click
+            setState({ isPaneOpen: false });
+            }}
+            >
+            <div>
+                <TransactionDetails transactionToBeDisplayed={transaction} />
+            </div>
+            
+      </SlidingPane>
+
+
         </>
     );
 }
