@@ -1,16 +1,26 @@
+import { useState } from "react";
 import Transaction from "../types/Transaction";
 import RiskBadge from "./RiskBadge";
+import TransactionDetails from "./TransactionDetails";
 
 export interface SingleTransactionProps{
    transaction :Transaction
+   
 }
 
 const SingleTransaction = ({transaction} : SingleTransactionProps) =>{ 
 
 
+    const[isVisible, setIsVisible] = useState(false);
+
+    const handClick = () => {
+            setIsVisible(true);
+    }
+
+ 
     return (
         <>
-        <li style = {{backgroundColor : "#3C3939",display : "flex", justifyContent: "space-between",width : "70vw"}}>
+        <li style = {{backgroundColor : "",display : "flex", justifyContent: "space-between",width : "70vw"}} onClick={handClick}>
             <div style = {{display : "flex", flexDirection: "column", justifyContent: "flex-start"}}>
                 <span>{transaction.id}</span>
                 <div>
@@ -28,7 +38,7 @@ const SingleTransaction = ({transaction} : SingleTransactionProps) =>{
                     <p> arrow key</p>
                 </div> */}
             </div>
-            
+            {isVisible && <TransactionDetails transactionToBeDisplayed={transaction} />}
 
         </li>
         </>

@@ -24,7 +24,8 @@ li:hover{
 .sideBar{
     margin-top: 25px;
     margin-right: 10px;
-    background-color: #002D72;
+    /* background-color: #002D72; */
+
     min-height: 100vh;
 
 }

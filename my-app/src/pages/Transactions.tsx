@@ -7,7 +7,15 @@
         listOfTransactions : Transaction[];
  }
  
- const Transactions = ({listOfTransactions}: TransactionsProps) =>{
+ const Transactions = ({listOfTransactions}: TransactionsProps) =>{ 
+
+
+        {/*
+                
+                onclick = somefunction(item.id)
+                whi
+        
+        */}
         return (
 
                 <ul>
