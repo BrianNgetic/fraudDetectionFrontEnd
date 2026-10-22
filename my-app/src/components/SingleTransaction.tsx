@@ -10,6 +10,7 @@ import TransactionDetails from "./TransactionDetails";
 
 export interface SingleTransactionProps{
    transaction :Transaction
+
    
 }
 
