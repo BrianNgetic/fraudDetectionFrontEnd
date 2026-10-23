@@ -36,5 +36,10 @@ li:hover{
 }
 
 .mainTableContainer{
+ 
     background-color: #0066b2;
+}
+
+.transactionPage{
+    margin-left: 20px;
 }

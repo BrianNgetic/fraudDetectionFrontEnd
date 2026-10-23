@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
-import Transaction from "../types/Transaction";
+import Transaction, { RiskLevel } from "../types/Transaction";
  import SingleTransaction from "../components/SingleTransaction";
+ import MetricCard from "@/components/MetricCard";
+import "../components/ComponentStyling.css"
 import { KeyboardReturnRounded } from "@mui/icons-material";
 //  import { SingleTransactionProps } from "../components/SingleTransaction";
 
@@ -45,6 +47,8 @@ import { KeyboardReturnRounded } from "@mui/icons-material";
                 HIGH: 3
         };
 
+        //here am combining search and filter functionality
+
         const transactionsToDisplay = listOfTransactions
         .filter((t) => {
                 if (!normalizedSearch) return true;
@@ -62,13 +66,13 @@ import { KeyboardReturnRounded } from "@mui/icons-material";
                         case "Lowest":
                                 return riskWeights[a.riskLevel] - riskWeights[b.riskLevel];
                         
-                        // 3. Fixed capitalization bug for "Largest" / "Smallest" (kept lowercase for consistency)
+                      
                         case "Largest": 
                                 return Number(b.amount) - Number(a.amount);
                         case "Smallest":
                                 return Number(a.amount) - Number(b.amount);
                         
-                        // 4. Performance boost: use Date.parse() or numerical subtraction if time is a timestamp/ISO string
+                        
                         case "Newest":
                                 return Date.parse(b.time) - Date.parse(a.time);
                         case "Oldest":
@@ -80,54 +84,75 @@ import { KeyboardReturnRounded } from "@mui/icons-material";
         });
 
 
+        let totalTransactions  = listOfTransactions.length;
+        let totalHighRiskTransactions = listOfTransactions.filter((x) => x.riskLevel == RiskLevel.HIGH).length;
+        let totalFlaggedTransactions = listOfTransactions.filter((x) => x.flagged == true).length;
+
 
         return (
-         <>
+         <div className="transactionPage">
 
+       
+                <div className =  "headerContainer">
+                        <h1>Transactions</h1>
+                        <h5 style = {{display : "flex", justifyContent : "flex-end" ,fontWeight : "bold", fontSize: "1rem"}}>
+                                All Transactions
+                        </h5>
+                        <p>Browse and investigate transaction history</p>
+                </div>
+                <div className = "summaryContainer" style={{display: "flex", justifyContent: "space-between"}}>
+                        <MetricCard Label={"Total Transactions"} Value={totalTransactions}/>
+                        <MetricCard Label={"High Risk"} Value={totalHighRiskTransactions}/>
+                        <MetricCard Label={"Flagged"} Value={totalFlaggedTransactions}/>
+                        
+                </div>
                 <div className="searchContainer">
 
                         <form onSubmit = {handleSearch}>
                                 <input type = "search" placeholder="Search transaction ID or customer..."
                                 ref = {searchInputRef}
-                                        style={{width : "100vw"}}
+                                        style={{width : "70vw"}}
                                 >
                                 </input>
                                 <button type = "submit">Search</button>
                         </form>
 
-                          <div  className="sortContainter">
-                        <label>Sort By: </label>
+                        <div  className="sortContainter">
+                                <label>Sort By: </label>
 
-                        <select id  = "sortOptions" onChange={ (e) => {setSelectedGroup(e.target.value)}}>
-                                <option value  = "All"> All </option>
-                                <option value = "Newest">Newest first</option>
-                                <option value = "Oldest">Oldest first</option>
-                                <option value = "Highest" >Highest Risk</option>
-                                <option value = "Lowest">Lowest Risk</option>
-                                <option value = "Largest">Largest Amount</option>
-                                <option value = "Smallest">smallest Amount</option>
-                                
-                        </select>
+                                <select id  = "sortOptions" onChange={ (e) => {setSelectedGroup(e.target.value)}}>
+                                        <option value  = "All"> All </option>
+                                        <option value = "Newest">Newest first</option>
+                                        <option value = "Oldest">Oldest first</option>
+                                        <option value = "Highest" >Highest Risk</option>
+                                        <option value = "Lowest">Lowest Risk</option>
+                                        <option value = "Largest">Largest Amount</option>
+                                        <option value = "Smallest">smallest Amount</option>
+                                        
+                                </select>
 
-                </div>
+                         </div>
 
                 </div>
               
+                <div className = "TransactionContainer">
+                        <ul style={{ backgroundColor: "#0066bb" }}>
+                                {
+                        
+                                transactionsToDisplay.map( (singleTransaction) => (
+                                        
+                                <div onClick={() => handleFilter(singleTransaction)}>
+                                        <SingleTransaction   key = {singleTransaction.id} transaction ={ singleTransaction}
+                                        />
+                                </div>
+                                ))
+                        
+                                }
+                        </ul>
 
-                <ul style={{ backgroundColor: "#0066bb" }}>
-                        {
-                      
-                        transactionsToDisplay.map( (singleTransaction) => (
-                                
-                          <div onClick={() => handleFilter(singleTransaction)}>
-                                <SingleTransaction   key = {singleTransaction.id} transaction ={ singleTransaction}
-                                />
-                           </div>
-                        ))
-                     
-                        }
-                </ul>
-         </>
+                </div>
+                
+        </div>
         );
 }
 
